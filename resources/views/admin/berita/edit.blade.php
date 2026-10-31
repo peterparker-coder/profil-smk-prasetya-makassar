@@ -1,5 +1,8 @@
 
-@extends('layouts.public')
+@extends('layouts.admin')
+
+@section('title', 'Edit Berita')
+@section('breadcrumb', 'Admin / Berita / Edit')
 
 @section('content')
 <div class="container py-5">
