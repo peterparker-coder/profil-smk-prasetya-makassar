@@ -8,32 +8,25 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /**
-     * Tampilkan halaman login.
-     */
     public function showLoginForm()
     {
-        // Jika sudah login, arahkan ke dashboard admin
-        if (Auth::check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.berita.index');
         }
 
         return view('auth.login');
     }
 
-    /**
-     * Proses autentikasi login.
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
         $remember = $request->boolean('remember');
 
-        if (Auth::attempt($credentials, $remember)) {
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('admin.berita.index'));
@@ -46,12 +39,9 @@ class LoginController extends Controller
             ->onlyInput('email');
     }
 
-    /**
-     * Proses logout.
-     */
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -59,4 +49,3 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 }
-

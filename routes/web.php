@@ -6,27 +6,24 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\ProfilSekolahController;
 
-// ─── Halaman Publik ───────────────────────────────────────────────────────────
-
+// Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/berita/{slug}', [HomeController::class, 'show'])
     ->name('berita.show');
 
-// ─── Autentikasi ──────────────────────────────────────────────────────────────
-
-Route::middleware('guest')->group(function () {
+// Autentikasi Admin
+Route::middleware('guest:admin')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])
-    ->middleware('auth')
+    ->middleware('auth:admin')
     ->name('logout');
 
-// ─── Admin (dilindungi middleware auth) ──────────────────────────────────────
-
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+// Halaman Admin
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
     // CRUD Berita
     Route::resource('berita', BeritaController::class)
