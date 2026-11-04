@@ -38,7 +38,7 @@ class ProfilSekolahController extends Controller
         }
 
         return redirect()
-        ->route('profil-sekolah.edit')
+        ->route('admin.profil-sekolah.edit')
         ->with('success', 'Profil sekolah berhasil diperbarui.');
     }
 }

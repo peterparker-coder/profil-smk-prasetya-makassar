@@ -25,7 +25,7 @@
         </div>
     @endif
 
-        <form action="{{ route('profil-sekolah.update') }}"
+        <form action="{{ route('admin.profil-sekolah.update') }}"
         method="POST">
         @csrf
         @method('PUT')

@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\ProfilSekolahController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TenagaPendidikController;
 
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -25,7 +27,11 @@ Route::post('/logout', [LoginController::class, 'logout'])
 // Halaman Admin
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
-    // CRUD Berita
+// Dashboard Admin
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
+
+    // CRUD Beritaa
     Route::resource('berita', BeritaController::class)
         ->except(['show'])
         ->parameters(['berita' => 'berita']);
@@ -36,4 +42,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::put('/profil-sekolah', [ProfilSekolahController::class, 'update'])
         ->name('profil-sekolah.update');
+
+        // CRUD Guru dan Tenaga Kependidikan
+Route::resource('tenaga-pendidik', TenagaPendidikController::class)
+    ->parameters(['tenaga-pendidik' => 'tenagaPendidik']);
 });

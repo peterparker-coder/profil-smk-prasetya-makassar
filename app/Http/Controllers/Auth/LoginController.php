@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.berita.index');
+            return redirect()->route('admin.dashboard');
         }
 
         return view('auth.login');

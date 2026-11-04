@@ -132,6 +132,14 @@
     <ul class="nav flex-column sidebar-nav mt-2">
 
         <li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+       href="{{ route('admin.dashboard') }}">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+    </a>
+</li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}"
                href="{{ route('admin.berita.index') }}">
                 <i class="bi bi-newspaper"></i>
@@ -144,6 +152,14 @@
                href="{{ route('admin.profil-sekolah.edit') }}">
                 <i class="bi bi-building"></i>
                 Profil Sekolah
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.tenaga-pendidik.*') ? 'active' : '' }}"
+            href="{{ route('admin.tenaga-pendidik.index') }}">
+                <i class="bi bi-people"></i>
+                Data Guru & Tendik
             </a>
         </li>
 
@@ -184,12 +200,12 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
                 <i class="bi bi-person-circle fs-5"></i>
-                <span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
+                <span class="d-none d-sm-inline">{{ Auth::guard('admin')->user()->name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                 <li>
                     <span class="dropdown-item-text small text-secondary">
-                        {{ Auth::user()->email }}
+                        {{ Auth::guard('admin')->user()->email }}
                     </span>
                 </li>
                 <li><hr class="dropdown-divider"></li>
