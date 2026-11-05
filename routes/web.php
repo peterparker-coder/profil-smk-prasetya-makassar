@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfilSekolahController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TenagaPendidikController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\GaleriController;
 
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -36,9 +37,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     Route::resource('berita', BeritaController::class)
         ->except(['show'])
         ->parameters(['berita' => 'berita']);
+
         // CRUD Data Siswa
     Route::resource('siswa', SiswaController::class)
         ->parameters(['siswa' => 'siswa']);
+
+        // CRUD Galeri
+Route::resource('galeri', GaleriController::class)
+    ->parameters(['galeri' => 'galeri']);
 
     // Profil Sekolah
     Route::get('/profil-sekolah', [ProfilSekolahController::class, 'edit'])

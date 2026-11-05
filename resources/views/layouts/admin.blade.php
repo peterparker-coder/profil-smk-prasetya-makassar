@@ -164,12 +164,20 @@
         </li>
 
         <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}"
-       href="{{ route('admin.siswa.index') }}">
-        <i class="bi bi-mortarboard"></i>
-        Data Siswa
-    </a>
-</li>
+            <a class="nav-link {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}"
+            href="{{ route('admin.siswa.index') }}">
+                <i class="bi bi-mortarboard"></i>
+                Data Siswa
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.galeri.*') ? 'active' : '' }}"
+            href="{{ route('admin.galeri.index') }}">
+                <i class="bi bi-images"></i>
+                Galeri Sekolah
+            </a>
+        </li>
 
         <li class="mt-3" style="padding: 0 0.75rem;">
             <hr class="border-white opacity-25 my-1">
