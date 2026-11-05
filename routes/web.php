@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TenagaPendidikController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\ProgramKeahlianController;
 
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -20,6 +21,7 @@ Route::get('/berita/{slug}', [HomeController::class, 'show'])
 Route::middleware('guest:admin')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
+    
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])
@@ -45,6 +47,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
         // CRUD Galeri
 Route::resource('galeri', GaleriController::class)
     ->parameters(['galeri' => 'galeri']);
+    // CRUD Program Keahlian
+Route::resource('program-keahlian', ProgramKeahlianController::class)
+    ->except(['show'])
+    ->parameters(['program-keahlian' => 'programKeahlian']);
 
     // Profil Sekolah
     Route::get('/profil-sekolah', [ProfilSekolahController::class, 'edit'])

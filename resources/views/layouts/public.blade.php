@@ -24,25 +24,40 @@
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto gap-lg-2">
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#profil">Profil Sekolah</a>
+                        <a class="nav-link" href="{{ route('home') }}#profil">Profil Sekolah</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#visi-misi">Visi & Misi</a>
+                        <a class="nav-link" href="{{ route('home') }}#visi-misi">Visi & Misi</a>
                     </li>
-                    <li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}#berita">Berita</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#kontak">Kontak</a>
+                        <a class="nav-link" href="{{ route('home') }}#kontak">Kontak</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}#alamat">Alamat</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}#tenaga-pendidik">Guru & Tendik</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}#program-keahlian">Program Keahlian</a>
+                    </li>
+
                 </ul>
             </div>
         </div>

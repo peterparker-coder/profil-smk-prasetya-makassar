@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\ProfilSekolah;
+use App\Models\Galeri;
+use App\Models\TenagaPendidik;
+use App\Models\ProgramKeahlian;
 
 class HomeController extends Controller
 {
@@ -16,7 +19,23 @@ class HomeController extends Controller
 
         $profil = ProfilSekolah::first();
 
-        return view('home', compact('beritas', 'profil'));
+        $galeris = Galeri::latest()
+            ->take(8)
+            ->get();
+
+        $tenagaPendidiks = TenagaPendidik::latest()->get();
+
+        $programKeahlians = ProgramKeahlian::where('status', true)
+        ->latest()
+        ->get();
+
+        return view('home', compact(
+            'beritas',
+            'profil',
+            'galeris',
+            'tenagaPendidiks',
+            'programKeahlians'
+        ));
     }
 
     public function show(string $slug)

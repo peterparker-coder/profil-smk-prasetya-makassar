@@ -171,57 +171,116 @@
     </div>
 </section>
 
-{{-- PROGRAM KEAHLIAN --}}
-<section id="program" class="py-4 py-lg-5">
+{{-- GURU DAN TENAGA KEPENDIDIKAN --}}
+<section id="tenaga-pendidik" class="py-5 bg-light">
     <div class="container">
         <div class="text-center mb-4">
-            <p class="text-primary fw-bold text-uppercase mb-2">Pendidikan Kejuruan</p>
-            <h2 class="fw-bold mb-2">Program Keahlian</h2>
-            <p class="text-secondary mb-0">
-                Kenali bidang keahlian dan kompetensi yang dipelajari
-                di SMKS Prasetya Makassar.
+            <p class="text-primary fw-bold text-uppercase mb-2">
+                Sumber Daya Sekolah
+            </p>
+            <h2 class="fw-bold mb-2">
+                Guru dan Tenaga Kependidikan
+            </h2>
+            <p class="text-secondary">
+                Kenali guru dan tenaga kependidikan SMKS Prasetya Makassar.
             </p>
         </div>
 
-        <div class="row g-3 g-lg-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 h-100">
-                    <div class="card-body p-4">
-                        <p class="text-primary fw-semibold mb-2">PROGRAM 01</p>
-                        <h3 class="h5 fw-bold">Informasi Jurusan</h3>
-                        <p class="text-secondary mb-0">
-                            Informasi nama jurusan, kompetensi, dan peluang
-                            karier akan ditambahkan berdasarkan data resmi sekolah.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="row g-4">
+            @forelse ($tenagaPendidiks as $tenagaPendidik)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        @if ($tenagaPendidik->foto)
+                            <img
+                                src="{{ asset('storage/' . $tenagaPendidik->foto) }}"
+                                class="card-img-top"
+                                alt="{{ $tenagaPendidik->nama }}"
+                                style="height: 260px; object-fit: cover;"
+                            >
+                        @else
+                            <div class="bg-secondary-subtle d-flex align-items-center justify-content-center"
+                                 style="height: 260px;">
+                                <span class="text-secondary">Foto belum tersedia</span>
+                            </div>
+                        @endif
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 h-100">
-                    <div class="card-body p-4">
-                        <p class="text-primary fw-semibold mb-2">PROGRAM 02</p>
-                        <h3 class="h5 fw-bold">Kompetensi Pembelajaran</h3>
-                        <p class="text-secondary mb-0">
-                            Penjelasan keterampilan dan materi pembelajaran
-                            akan disesuaikan dengan program keahlian yang tersedia.
-                        </p>
-                    </div>
-                </div>
-            </div>
+                        <div class="card-body text-center">
+                            <h3 class="h5 fw-bold">
+                                {{ $tenagaPendidik->nama }}
+                            </h3>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 h-100">
-                    <div class="card-body p-4">
-                        <p class="text-primary fw-semibold mb-2">PROGRAM 03</p>
-                        <h3 class="h5 fw-bold">Peluang Karier</h3>
-                        <p class="text-secondary mb-0">
-                            Informasi peluang kerja dan pengembangan karier
-                            akan ditampilkan sesuai kompetensi setiap jurusan.
-                        </p>
+                            <p class="text-primary mb-1">
+                                {{ $tenagaPendidik->jabatan }}
+                            </p>
+
+                            <small class="text-secondary">
+                                {{ $tenagaPendidik->kategori }}
+                            </small>
+
+                            @if ($tenagaPendidik->kategori === 'Guru' && $tenagaPendidik->mata_pelajaran)
+                                <p class="text-secondary mt-2 mb-0">
+                                    Mata Pelajaran: {{ $tenagaPendidik->mata_pelajaran }}
+                                </p>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-secondary">
+                        Belum ada data guru dan tenaga kependidikan.
+                    </p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+
+{{-- PROGRAM KEAHLIAN --}}
+<section id="program-keahlian" class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p class="text-primary fw-bold text-uppercase mb-2">
+                Pendidikan dan Keahlian
+            </p>
+            <h2 class="fw-bold mb-2">Program Keahlian</h2>
+            <p class="text-secondary">
+                Pilihan program keahlian di SMKS Prasetya Makassar.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            @forelse ($programKeahlians as $program)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm h-100 overflow-hidden">
+                        @if ($program->foto)
+                            <img
+                                src="{{ asset('storage/' . $program->foto) }}"
+                                alt="{{ $program->nama_program }}"
+                                class="card-img-top"
+                                style="height: 230px; object-fit: cover;"
+                            >
+                        @endif
+
+                        <div class="card-body p-4">
+                            <h3 class="h5 fw-bold">
+                                {{ $program->nama_program }}
+                            </h3>
+
+                            <p class="text-secondary mb-0">
+                                {{ $program->deskripsi ?: 'Informasi program keahlian sekolah.' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center py-4">
+                    <p class="text-secondary mb-0">
+                        Belum ada program keahlian yang tersedia.
+                    </p>
+                </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -289,10 +348,13 @@
 </section>
 
 {{-- GALERI KEGIATAN SEKOLAH --}}
+{{-- GALERI KEGIATAN SEKOLAH --}}
 <section id="galeri" class="py-4 py-lg-5">
     <div class="container">
         <div class="text-center mb-4">
-            <p class="text-primary fw-bold text-uppercase mb-2">Dokumentasi Sekolah</p>
+            <p class="text-primary fw-bold text-uppercase mb-2">
+                Dokumentasi Sekolah
+            </p>
             <h2 class="fw-bold mb-2">Galeri Kegiatan Sekolah</h2>
             <p class="text-secondary mb-0">
                 Dokumentasi kegiatan dan aktivitas SMKS Prasetya Makassar.
@@ -300,47 +362,45 @@
         </div>
 
         <div class="row g-3 g-lg-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 h-100">
-                    <div class="card-body p-3">
-                        <div class="bg-light rounded-3 p-5 text-center mb-3">
-                            <span class="text-secondary">Foto kegiatan</span>
-                        </div>
-                        <h3 class="h5 fw-bold">Kegiatan Pembelajaran</h3>
-                        <p class="text-secondary mb-0">
-                            Dokumentasi proses pembelajaran di lingkungan sekolah.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            @forelse ($galeris as $galeri)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm rounded-3 h-100 overflow-hidden">
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 h-100">
-                    <div class="card-body p-3">
-                        <div class="bg-light rounded-3 p-5 text-center mb-3">
-                            <span class="text-secondary">Foto kegiatan</span>
-                        </div>
-                        <h3 class="h5 fw-bold">Kegiatan Siswa</h3>
-                        <p class="text-secondary mb-0">
-                            Dokumentasi aktivitas dan kegiatan peserta didik.
-                        </p>
-                    </div>
-                </div>
-            </div>
+                        <img
+                            src="{{ asset('storage/' . $galeri->foto) }}"
+                            class="card-img-top"
+                            alt="{{ $galeri->judul }}"
+                            style="height: 230px; object-fit: cover;"
+                            loading="lazy"
+                        >
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm rounded-3 h-100">
-                    <div class="card-body p-3">
-                        <div class="bg-light rounded-3 p-5 text-center mb-3">
-                            <span class="text-secondary">Foto kegiatan</span>
+                        <div class="card-body p-3">
+                            <small class="text-secondary">
+                                {{ $galeri->tanggal
+                                    ? \Carbon\Carbon::parse($galeri->tanggal)->format('d F Y')
+                                    : '-' }}
+                            </small>
+
+                            <h3 class="h5 fw-bold mt-2">
+                                {{ $galeri->judul }}
+                            </h3>
+
+                            <p class="text-secondary mb-0">
+                                {{ $galeri->deskripsi ?: 'Dokumentasi kegiatan sekolah.' }}
+                            </p>
                         </div>
-                        <h3 class="h5 fw-bold">Lingkungan Sekolah</h3>
+
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center py-4">
+                    <div class="bg-light rounded-3 p-4">
                         <p class="text-secondary mb-0">
-                            Dokumentasi lingkungan dan fasilitas sekolah.
+                            Belum ada dokumentasi kegiatan sekolah.
                         </p>
                     </div>
                 </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>

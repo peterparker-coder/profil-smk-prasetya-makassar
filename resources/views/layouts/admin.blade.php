@@ -179,6 +179,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="{{ route('admin.program-keahlian.index') }}"
+            class="nav-link {{ request()->routeIs('admin.program-keahlian.*') ? 'active' : '' }}">
+                Program Keahlian
+            </a>
+        </li>
+
         <li class="mt-3" style="padding: 0 0.75rem;">
             <hr class="border-white opacity-25 my-1">
         </li>
